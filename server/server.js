@@ -15,7 +15,11 @@ const PORT = process.env.PORT || 3001
 dbConnection()
 
 // Handle CORS issues
-app.use(cors())
+app.use(cors({
+  origin: ['https://argent-bank-frontend-smoky.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
 
 // Request payload middleware
 app.use(express.json())
