@@ -1,15 +1,17 @@
 const mongoose = require('mongoose')
+
 const databaseUrl = process.env.DATABASE_URL || 'mongodb://localhost/argentBankDB'
 
 let isConnected = false
 
 module.exports = async () => {
   if (isConnected) return
-  
+
   try {
-    await mongoose.connect(databaseUrl, { 
-      useNewUrlParser: true,
-      serverSelectionTimeoutMS: 5000,
+    await mongoose.connect(databaseUrl, {
+      serverSelectionTimeoutMS: 3000,
+      connectTimeoutMS: 3000,
+      socketTimeoutMS: 3000,
     })
     isConnected = true
     console.log('Database successfully connected')
